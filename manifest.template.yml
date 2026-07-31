@@ -1,0 +1,86 @@
+manifest_version: 2
+type: DCM_PROJECT
+
+default_target: DEV
+
+targets:
+  DEV:
+    account_identifier: ${ACCOUNT_ID}
+    project_name: DCM_ADMIN.PROJECTS.DCM_DEV
+    project_owner: ${DEPLOYER_ROLE}
+    templating_config: DEV
+
+  TEST:
+    account_identifier: ${ACCOUNT_ID}
+    project_name: DCM_ADMIN.PROJECTS.DCM_TEST
+    project_owner: ${DEPLOYER_ROLE}
+    templating_config: TEST
+
+  PROD:
+    account_identifier: ${ACCOUNT_ID}
+    project_name: DCM_ADMIN.PROJECTS.DCM_PROD
+    project_owner: ${DEPLOYER_ROLE}
+    templating_config: PROD
+
+templating:
+  defaults:
+    deployer_user: "${DEPLOYER_USER}"
+    # Warehouse names
+    etl_wh: "ETL_WH"
+    load_wh: "LOAD_WH"
+    analyst_wh: "ANALYST_WH"
+    bi_wh: "BI_WH"
+    developer_wh: "DEVELOPER_WH"
+    deployment_wh: "DEPLOYMENT_WH"
+    ops_wh: "OPS_WH"
+    ai_wh: "AI_WH"
+    # Warehouse sizes
+    etl_wh_size: "X-SMALL"
+    bi_wh_size: "X-SMALL"
+    developer_wh_size: "X-SMALL"
+    load_wh_size: "X-SMALL"
+    analyst_wh_size: "X-SMALL"
+    deployment_wh_size: "X-SMALL"
+    ops_wh_size: "X-SMALL"
+    ai_wh_size: "X-SMALL"
+    auto_suspend_secs: 60
+
+  configurations:
+    DEV:
+      env_prefix: "DEV_"
+      etl_wh_size: "X-SMALL"
+      bi_wh_size: "X-SMALL"
+      developer_wh_size: "X-SMALL"
+      load_wh_size: "X-SMALL"
+      analyst_wh_size: "X-SMALL"
+      deployment_wh_size: "X-SMALL"
+      ops_wh_size: "X-SMALL"
+      ai_wh_size: "X-SMALL"
+      auto_suspend_secs: 60
+    
+    
+    TEST:
+      env_prefix: "TST_"
+      etl_wh_size: "X-SMALL"
+      bi_wh_size: "X-SMALL"
+      developer_wh_size: "X-SMALL"
+      load_wh_size: "X-SMALL"
+      analyst_wh_size: "X-SMALL"
+      deployment_wh_size: "X-SMALL"
+      ops_wh_size: "X-SMALL"
+      ai_wh_size: "X-SMALL"
+      auto_suspend_secs: 60
+    
+
+    PROD:
+      env_prefix: "PRD_"
+      etl_wh_size: "MEDIUM"
+      bi_wh_size: "SMALL"
+      developer_wh_size: "SMALL"
+      load_wh_size: "X-SMALL"
+      analyst_wh_size: "X-SMALL"
+      deployment_wh_size: "X-SMALL"
+      ops_wh_size: "X-SMALL"
+      ai_wh_size: "X-SMALL"
+      auto_suspend_secs: 300
+ 

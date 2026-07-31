@@ -1,0 +1,38 @@
+-- ===================================================================
+--  PRE-DEPLOY: Shared Account-Level Roles
+--  These roles are shared across all environments in the account.
+--  Using CREATE ROLE IF NOT EXISTS ensures idempotent execution
+--  regardless of how many times or for how many environments this runs.
+--  
+--  NOTE: This file uses standard SQL (not DCM DEFINE syntax).
+--        Jinja templating is NOT supported in companion scripts.
+-- ===================================================================
+use role securityadmin;
+-- DB_OWNER: Centralizes database ownership under SYSADMIN hierarchy.
+CREATE ROLE IF NOT EXISTS DB_OWNER
+    COMMENT = 'Database owner role with full privileges on all objects in the database that it owns.';
+GRANT ROLE DB_OWNER TO ROLE SYSADMIN;
+
+use role accountadmin;
+GRANT CREATE DATABASE ON ACCOUNT TO ROLE DB_OWNER;
+use role securityadmin;
+
+-- ANALYST: Read-only access to production curated layers.
+CREATE ROLE IF NOT EXISTS ANALYST
+    COMMENT = 'Read-only access to production curated layers (Gold, Silver, Common)';
+GRANT ROLE ANALYST TO ROLE DB_OWNER;
+
+-- TESTER: Read-only access to test all layers.
+CREATE ROLE IF NOT EXISTS TESTER
+    COMMENT = 'Read-only access to test all layers (Gold, Silver, Bronze, Common)';
+GRANT ROLE TESTER TO ROLE DB_OWNER;
+
+--- DEVELOPER: Crud access to dev and test environments to make chanes
+CREATE ROLE IF NOT EXISTS DEVELOPER
+    COMMENT = 'Developer - CRUD on Development Bronze, Silver, Gold, Common, read access on all others.';
+GRANT ROLE TESTER TO ROLE DB_OWNER;
+
+-- DEVOPS: Production environment management.
+CREATE ROLE IF NOT EXISTS DEVOPS
+    COMMENT = 'Ability to manage production environment.';
+GRANT ROLE DEVOPS TO ROLE DB_OWNER;
