@@ -89,6 +89,8 @@ GRANT MONITOR ON WAREHOUSE {{env_prefix}}DEPLOYMENT_WH TO ROLE DEVOPS;
 DEFINE ROLE {{env_prefix}}ETL
     COMMENT = 'ETL service - Read on Bronze, CRUD on Silver and Gold';
 
+GRANT OWNERSHIP ON ROLE {{env_prefix}}ETL TO ROLE USERADMIN;
+
 ---- DB Roles
 GRANT DATABASE ROLE {{env_prefix}}BRONZE.DB_R TO ROLE {{env_prefix}}ETL;
 GRANT DATABASE ROLE {{env_prefix}}SILVER.DB_CRUD TO ROLE {{env_prefix}}ETL;
@@ -105,6 +107,8 @@ GRANT MONITOR ON WAREHOUSE {{env_prefix}}ETL_WH TO ROLE {{env_prefix}}ETL;
 DEFINE ROLE {{env_prefix}}LOADER
     COMMENT = 'Data ingestion service - CRUD on Bronze only';
 
+GRANT OWNERSHIP ON ROLE {{env_prefix}}LOADER TO ROLE USERADMIN;
+
 ---- DB Roles
 GRANT DATABASE ROLE {{env_prefix}}BRONZE.DB_CRUD TO ROLE {{env_prefix}}LOADER;
 ---- DB Roles Read
@@ -116,6 +120,8 @@ GRANT MONITOR ON WAREHOUSE {{env_prefix}}LOAD_WH TO ROLE {{env_prefix}}LOADER;
 {# --- CONSUMER --- #}
 DEFINE ROLE {{env_prefix}}CONSUMER
     COMMENT = 'Downstream consumer service - read on Silver and Gold';
+
+GRANT OWNERSHIP ON ROLE {{env_prefix}}CONSUMER TO ROLE USERADMIN;
 
 ---- DB Roles
 GRANT DATABASE ROLE {{env_prefix}}SILVER.DB_R TO ROLE {{env_prefix}}CONSUMER;
