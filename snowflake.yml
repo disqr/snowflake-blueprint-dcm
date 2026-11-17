@@ -1,0 +1,9 @@
+definition_version: 2
+
+#pass in general overall variables you will need here.
+env:
+  my_test_value: "this is a test"
+
+
+
+

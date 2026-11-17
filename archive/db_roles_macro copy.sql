@@ -17,9 +17,11 @@
     GRANT ALL PRIVILEGES ON ALL SCHEMAS IN DATABASE {{db_name}} TO DATABASE ROLE {{db_name}}.DB_CRUD;
     GRANT ALL PRIVILEGES ON FUTURE SCHEMAS IN DATABASE {{db_name}} TO DATABASE ROLE {{db_name}}.DB_CRUD;
 
+    --May have taken too many away after deploy tests....adding
+    --STAGES
     {% set crud_objects = ['TABLES','VIEWS','MATERIALIZED VIEWS','DYNAMIC TABLES','EXTERNAL TABLES',
                            'FILE FORMATS','STREAMS','TASKS','SEQUENCES','EVENT TABLES',
-                           'FUNCTIONS','PROCEDURES','PIPES'] %}
+                           'FUNCTIONS','PROCEDURES', 'STAGES'] %}
     {% for scope in ['ALL','FUTURE'] %}
       {% for obj in crud_objects %}
         GRANT ALL PRIVILEGES ON {{scope}} {{obj}} IN DATABASE {{db_name}} TO DATABASE ROLE {{db_name}}.DB_CRUD;

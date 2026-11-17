@@ -1,9 +1,3 @@
-{{ create_db_roles(env_prefix ~ 'BRONZE') }}
-{{ create_db_roles(env_prefix ~ 'SILVER') }}
-{{ create_db_roles(env_prefix ~ 'GOLD') }}
-{{ create_db_roles(env_prefix ~ 'COMMON') }}
-{{ create_db_roles(env_prefix ~ 'ADMIN') }}
-
 -- ===================================================================
 --  CUSTOM ROLES
 --  Note that role hierarchies are avoided here for simplicity and to provide maximum flexibility in role assignment.

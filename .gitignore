@@ -2,3 +2,5 @@
 .DS*
 manifest.yml
 /out
+local-test*
+

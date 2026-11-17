@@ -1,0 +1,109 @@
+manifest_version: 2
+type: DCM_PROJECT
+
+default_target: DEV
+
+targets:
+  DEV:
+    account_identifier: {{account_identifier}}
+    project_name: DCM_ADMIN.PROJECTS.DCM_DEV
+    project_owner: DCM_DEPLOYER
+    templating_config: DEV
+
+  TST:
+    account_identifier: {{account_identifier}}
+    project_name: DCM_ADMIN.PROJECTS.DCM_TST
+    project_owner: DCM_DEPLOYER
+    templating_config: TST
+
+  PRD:
+    account_identifier: {{account_identifier}}
+    project_name: DCM_ADMIN.PROJECTS.DCM_PRD
+    project_owner: DCM_DEPLOYER
+    templating_config: PRD
+
+  # Generic sandbox target. project_name and env_prefix are placeholders: each sandbox
+  # passes its own project identifier (DCM_ADMIN.PROJECTS.DCM_SBX_<NAME>) and
+  # -D "env_prefix='<NAME>_'" at run time. See test-sbx.ps1.
+  SBX:
+    account_identifier: {{account_identifier}}
+    project_name: DCM_ADMIN.PROJECTS.DCM_SBX
+    project_owner: DCM_DEPLOYER
+    templating_config: SBX
+
+templating:
+  defaults:
+    deployer_user: "DCM_DEPLOYER"
+    # Warehouse names
+    etl_wh: "ETL_WH"
+    load_wh: "LOAD_WH"
+    analyst_wh: "ANALYST_WH"
+    bi_wh: "BI_WH"
+    developer_wh: "DEVELOPER_WH"
+    deployment_wh: "DEPLOYMENT_WH"
+    ops_wh: "OPS_WH"
+    ai_wh: "AI_WH"
+    # Warehouse sizes
+    etl_wh_size: "X-SMALL"
+    bi_wh_size: "X-SMALL"
+    developer_wh_size: "X-SMALL"
+    load_wh_size: "X-SMALL"
+    analyst_wh_size: "X-SMALL"
+    deployment_wh_size: "X-SMALL"
+    ops_wh_size: "X-SMALL"
+    ai_wh_size: "X-SMALL"
+    auto_suspend_secs: 60
+
+  configurations:
+    DEV:
+      env_prefix: "DEV_"
+      etl_wh_size: "X-SMALL"
+      bi_wh_size: "X-SMALL"
+      developer_wh_size: "X-SMALL"
+      load_wh_size: "X-SMALL"
+      analyst_wh_size: "X-SMALL"
+      deployment_wh_size: "X-SMALL"
+      ops_wh_size: "X-SMALL"
+      ai_wh_size: "X-SMALL"
+      auto_suspend_secs: 60
+    
+    
+    TST:
+      env_prefix: "TST_"
+      etl_wh_size: "X-SMALL"
+      bi_wh_size: "X-SMALL"
+      developer_wh_size: "X-SMALL"
+      load_wh_size: "X-SMALL"
+      analyst_wh_size: "X-SMALL"
+      deployment_wh_size: "X-SMALL"
+      ops_wh_size: "X-SMALL"
+      ai_wh_size: "X-SMALL"
+      auto_suspend_secs: 60
+    
+
+    PRD:
+      env_prefix: "PRD_"
+      etl_wh_size: "MEDIUM"
+      bi_wh_size: "SMALL"
+      developer_wh_size: "SMALL"
+      load_wh_size: "X-SMALL"
+      analyst_wh_size: "X-SMALL"
+      deployment_wh_size: "X-SMALL"
+      ops_wh_size: "X-SMALL"
+      ai_wh_size: "X-SMALL"
+      auto_suspend_secs: 300
+
+    # Placeholder env_prefix: each sandbox overrides it at run time with
+    # -D "env_prefix='<NAME>_'". See do-not-run-test-sbx.ps1.
+    SBX:
+      env_prefix: "SBX_"
+      etl_wh_size: "X-SMALL"
+      bi_wh_size: "X-SMALL"
+      developer_wh_size: "X-SMALL"
+      load_wh_size: "X-SMALL"
+      analyst_wh_size: "X-SMALL"
+      deployment_wh_size: "X-SMALL"
+      ops_wh_size: "X-SMALL"
+      ai_wh_size: "X-SMALL"
+      auto_suspend_secs: 60
+ 

@@ -1,21 +1,6 @@
 
-DEFINE DATABASE {{env_prefix}}BRONZE
-    COMMENT = 'Raw landing zone';
-
-DEFINE DATABASE {{env_prefix}}SILVER
-    COMMENT = 'Cleansed and conformed data';
-
-DEFINE DATABASE {{env_prefix}}GOLD
-    COMMENT = 'Business-ready models';
-
-DEFINE DATABASE {{env_prefix}}COMMON
-    COMMENT = 'Shared reference data';
-
-DEFINE DATABASE {{env_prefix}}ADMIN
-    COMMENT = 'Monitoring, and admin utilities';
-
-GRANT OWNERSHIP ON DATABASE {{env_prefix}}BRONZE TO ROLE DB_OWNER;
-GRANT OWNERSHIP ON DATABASE {{env_prefix}}SILVER TO ROLE DB_OWNER;
-GRANT OWNERSHIP ON DATABASE {{env_prefix}}GOLD TO ROLE DB_OWNER;
-GRANT OWNERSHIP ON DATABASE {{env_prefix}}COMMON TO ROLE DB_OWNER;
-GRANT OWNERSHIP ON DATABASE {{env_prefix}}ADMIN TO ROLE DB_OWNER;
+{{ create_db(env_prefix ~ 'BRONZE', 'Bronze layer - raw landed data') }}
+{{ create_db(env_prefix ~ 'SILVER', 'Silver layer - Cleansed and conformed data') }}
+{{ create_db(env_prefix ~ 'GOLD', 'Gold layer - Business-ready models') }}
+{{ create_db(env_prefix ~ 'COMMON', 'Common layer - shared reference data') }}
+{{ create_db(env_prefix ~ 'ADMIN', 'Admin layer - Monitoring, and admin utilities') }}

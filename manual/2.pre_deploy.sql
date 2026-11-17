@@ -8,14 +8,6 @@
 --        Jinja templating is NOT supported in companion scripts.
 -- ===================================================================
 use role securityadmin;
--- DB_OWNER: Centralizes database ownership under SYSADMIN hierarchy.
-CREATE ROLE IF NOT EXISTS DB_OWNER
-    COMMENT = 'Database owner role with full privileges on all objects in the database that it owns.';
-GRANT ROLE DB_OWNER TO ROLE SYSADMIN;
-
-use role accountadmin;
-GRANT CREATE DATABASE ON ACCOUNT TO ROLE DB_OWNER;
-use role securityadmin;
 
 -- ANALYST: Read-only access to production curated layers.
 CREATE ROLE IF NOT EXISTS ANALYST
@@ -30,7 +22,7 @@ GRANT ROLE TESTER TO ROLE DB_OWNER;
 --- DEVELOPER: Crud access to dev and test environments to make chanes
 CREATE ROLE IF NOT EXISTS DEVELOPER
     COMMENT = 'Developer - CRUD on Development Bronze, Silver, Gold, Common, read access on all others.';
-GRANT ROLE TESTER TO ROLE DB_OWNER;
+GRANT ROLE DEVELOPER TO ROLE DB_OWNER;
 
 -- DEVOPS: Production environment management.
 CREATE ROLE IF NOT EXISTS DEVOPS
