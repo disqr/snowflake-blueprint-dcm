@@ -1,6 +1,6 @@
-{% macro create_db(db_name, db_comment) %}
-    DEFINE DATABASE {{db_name}}
-        COMMENT = '{{db_comment}}';
-    {{ grant_db_owner('DATABASE', db_name) }}
-    {{ create_db_roles(db_name) }}
+{% macro create_db(catalog_name, catalog_comment) %}
+    DEFINE DATABASE {{catalog_name}}
+        COMMENT = '{{catalog_comment}}';
+    {{ grant_db_owner('DATABASE', catalog_name) }}
+    {{ create_db_roles(catalog_name) }}
 {% endmacro %}
