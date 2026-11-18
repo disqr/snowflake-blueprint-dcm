@@ -19,6 +19,10 @@
       - DB_OWNER account role exists (definition files transfer ownership to it).
 */
 
+-- 0.l DB Role setup uses the new inherited grants feature.
+USE ROLE ACCOUNTADMIN;
+ALTER ACCOUNT SET FEATURE_RBAC_INHERITED_GRANTS = 'ENABLED';
+
 -- 1. Create DCM_DEPLOYER and DB_OWNER roles.
 USE ROLE SECURITYADMIN;
 

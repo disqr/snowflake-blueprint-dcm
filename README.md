@@ -1,6 +1,16 @@
 # snowflake-blueprint-dcm
 A blueprint to set up a medallion architecture in Snowflake using DCM.
 
+## Notes on the blueprint
+
+### Deployment Role Separation by Privilege Needed
+
+You'll notice if you read the code a bit, that everything is owned by a DB_OWNER role but the actual IaC code runs under the DCM_DEPLOYER role (you'll see ownership grants to DB_OWNER in the code).  Note that the higher level privileges are stripped out of the DB_OWNER role which simply owns the database and schemas.  The reason for that is to separate out the needed privileges to manage the databases and schemas and manage the overall platform which makes some of the administrative work divisible.  This also enables an organization to use the open source DCM project as an initial setup, but then move to the method where Platform IaC can be easily separated from Database IaC e.g. a repo for platform, and perhaps multiple repos for database oriented subject areas such as EDW, ODS, etc.  Simply put, Platform IaC can run under the DCM_DEPLOYER role, while database IaC can run under the DB_OWNER role with a simple change e.g. 
+
+```{sql}
+GRANT CREATE DATABASE ON ACCOUNT TO ROLE DB_OWNER;
+```
+
 ## Database Naming
 
 ## Schema Naming
@@ -35,7 +45,8 @@ python util\generate_manifest.py <account_identifier>
 `manual/1.setup.sql` creates the `DCM_DEPLOYER` and `DB_OWNER` roles, grants
 `DCM_DEPLOYER` its account-level privileges, and creates the `DCM_ADMIN.PROJECTS` schema with
 the `DCM_DEV`, `DCM_TST`, and `DCM_PRD` project objects. The script switches roles itself with
-`USE ROLE`, and every statement is safe to re-run.
+`USE ROLE`, and every statement is safe to re-run.  It also turns opts in to inherited grants and 
+container-level MANAGE GRANTS.  Inherited grants are used are used for the database role grants in this project.
 
 ```{ps1}
 snow sql -f manual\1.setup.sql
