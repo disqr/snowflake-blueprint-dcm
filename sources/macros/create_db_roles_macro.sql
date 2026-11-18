@@ -15,8 +15,8 @@
     DEFINE DATABASE ROLE {{db_name}}.DB_R COMMENT = 'Database role with privileges to read (SELECT) data rows in tables and other objects in the database.';
 
     -- Ownership to DB_OWNER (DCM_DEPLOYER inherits DB_OWNER, so DCM can still manage them)
-    GRANT OWNERSHIP ON DATABASE ROLE {{db_name}}.DB_CRUD TO ROLE DB_OWNER;
-    GRANT OWNERSHIP ON DATABASE ROLE {{db_name}}.DB_R TO ROLE DB_OWNER;
+    {{ grant_db_owner('DATABASE ROLE', db_name ~ '.DB_CRUD') }}
+    {{ grant_db_owner('DATABASE ROLE', db_name ~ '.DB_R') }}
 
     -- CRUD
     GRANT MONITOR ON DATABASE {{db_name}} TO DATABASE ROLE {{db_name}}.DB_CRUD;
