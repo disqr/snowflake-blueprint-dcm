@@ -39,20 +39,20 @@ GRANT MONITOR ON WAREHOUSE {{env_prefix}}{{bi_wh}}      TO ROLE TESTER;
 
 {# --- DEVELOPER env-specific grants --- #}
 ---- DB Roles
-{% if env_prefix == "DEV_" %}
-    ---- DB Roles Crud
-    GRANT DATABASE ROLE {{env_prefix}}BRONZE.DB_CRUD TO ROLE DEVELOPER;
-    GRANT DATABASE ROLE {{env_prefix}}SILVER.DB_CRUD TO ROLE DEVELOPER;
-    GRANT DATABASE ROLE {{env_prefix}}GOLD.DB_CRUD   TO ROLE DEVELOPER;
-    GRANT DATABASE ROLE {{env_prefix}}COMMON.DB_CRUD TO ROLE DEVELOPER;
-    GRANT DATABASE ROLE {{env_prefix}}ADMIN.DB_CRUD  TO ROLE DEVELOPER;
-{% elif env_prefix == "PRD_" or env_prefix == "TST_" %}
-    ---- DB Roles Read
+{% if env_prefix == "PRD_" or env_prefix == "TST_" %}
+    ---- DB Roles Read (TST and PRD)
     GRANT DATABASE ROLE {{env_prefix}}BRONZE.DB_R TO ROLE DEVELOPER;
     GRANT DATABASE ROLE {{env_prefix}}SILVER.DB_R TO ROLE DEVELOPER;
     GRANT DATABASE ROLE {{env_prefix}}GOLD.DB_R   TO ROLE DEVELOPER;
     GRANT DATABASE ROLE {{env_prefix}}COMMON.DB_R TO ROLE DEVELOPER;
     GRANT DATABASE ROLE {{env_prefix}}ADMIN.DB_R  TO ROLE DEVELOPER;
+{% else %}
+    ---- DB Roles Crud (DEV and sandboxes, whose env_prefix is <NAME>_)
+    GRANT DATABASE ROLE {{env_prefix}}BRONZE.DB_CRUD TO ROLE DEVELOPER;
+    GRANT DATABASE ROLE {{env_prefix}}SILVER.DB_CRUD TO ROLE DEVELOPER;
+    GRANT DATABASE ROLE {{env_prefix}}GOLD.DB_CRUD   TO ROLE DEVELOPER;
+    GRANT DATABASE ROLE {{env_prefix}}COMMON.DB_CRUD TO ROLE DEVELOPER;
+    GRANT DATABASE ROLE {{env_prefix}}ADMIN.DB_CRUD  TO ROLE DEVELOPER;
 {% endif %}
 ---- WH
 GRANT USAGE   ON WAREHOUSE {{env_prefix}}{{developer_wh}} TO ROLE DEVELOPER;

@@ -86,9 +86,8 @@ warehouses it needs, which keeps role assignment flexible.
 | `ANALYST` | PRD | | R | R | R | | `ANALYST_WH`, `BI_WH` |
 | `ANALYST` | DEV, TST, SBX | | | | | | `ANALYST_WH` |
 | `TESTER` | All | R | R | R | R | R | `BI_WH` |
-| `DEVELOPER` | DEV | CRUD | CRUD | CRUD | CRUD | CRUD | `DEVELOPER_WH` |
+| `DEVELOPER` | DEV, SBX | CRUD | CRUD | CRUD | CRUD | CRUD | `DEVELOPER_WH` |
 | `DEVELOPER` | TST, PRD | R | R | R | R | R | `DEVELOPER_WH` |
-| `DEVELOPER` | SBX | | | | | | `DEVELOPER_WH` |
 | `DEVOPS` | All | CRUD | CRUD | CRUD | CRUD | CRUD | `OPS_WH`, `DEPLOYMENT_WH` |
 | `<env>ETL` | Own env | R | CRUD | CRUD | CRUD | R | `ETL_WH` |
 | `<env>LOADER` | Own env | CRUD | | | | R | `LOAD_WH` |
