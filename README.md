@@ -36,8 +36,7 @@ GRANT CREATE DATABASE ON ACCOUNT TO ROLE DB_OWNER;
 
 ### DB_OWNER
 
-`DB_OWNER` is modeled on the `db_owner` fixed database role in SQL Server, which has full control
-of a database: configuration, maintenance, object creation, security management, and even
+`DB_OWNER` has full control of a database: configuration, maintenance, object creation, security management, and even
 dropping the database. Snowflake separates these privileges, so the blueprint assembles them:
 
 - `DB_OWNER` **owns** each database, its schemas, and its database roles, so it can manage,
