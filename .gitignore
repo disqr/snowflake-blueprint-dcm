@@ -3,4 +3,6 @@
 manifest.yml
 /out
 local-test*
+.claude/settings.local.json
+CLAUDE.local.md
 

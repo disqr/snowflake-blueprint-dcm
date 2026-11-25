@@ -10,6 +10,7 @@
 -- Internal stage for flat-file loads
 DEFINE STAGE {{env_prefix}}BRONZE.STAGING.FILES
     COMMENT = 'Landing area for flat files';
+{{ grant_db_owner('STAGE', env_prefix ~ 'BRONZE.STAGING.FILES') }}
 
 -- Internal sub-layer for archive
 --<naming_format_schema_data_layer> ::= { ARC}_{ source_system_name }_{ connector_name } [ _ ] [ physical_source_connection_information | logical_source_connection_information ]

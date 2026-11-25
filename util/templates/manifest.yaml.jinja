@@ -24,7 +24,7 @@ targets:
 
   # Generic sandbox target. project_name and env_prefix are placeholders: each sandbox
   # passes its own project identifier (DCM_ADMIN.PROJECTS.DCM_SBX_<NAME>) and
-  # -D "env_prefix='<NAME>_'" at run time. See test-sbx.ps1.
+  # -D "env_prefix='<NAME>_'" at run time. See "Plan and deploy a sandbox" in README.md.
   SBX:
     account_identifier: {{account_identifier}}
     project_name: DCM_ADMIN.PROJECTS.DCM_SBX
@@ -33,7 +33,6 @@ targets:
 
 templating:
   defaults:
-    deployer_user: "DCM_DEPLOYER"
     # Warehouse names
     etl_wh: "ETL_WH"
     load_wh: "LOAD_WH"
@@ -94,7 +93,7 @@ templating:
       auto_suspend_secs: 300
 
     # Placeholder env_prefix: each sandbox overrides it at run time with
-    # -D "env_prefix='<NAME>_'". See do-not-run-test-sbx.ps1.
+    # -D "env_prefix='<NAME>_'". See "Plan and deploy a sandbox" in README.md.
     SBX:
       env_prefix: "SBX_"
       etl_wh_size: "X-SMALL"

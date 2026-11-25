@@ -1,9 +1,5 @@
 definition_version: 2
 
-#pass in general overall variables you will need here.
-env:
-  my_test_value: "this is a test"
-
-
-
-
+# Add project-wide variables for the Snowflake CLI here, for example:
+# env:
+#   my_variable: "value"

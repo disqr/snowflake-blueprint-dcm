@@ -7,6 +7,9 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
+if len(sys.argv) != 2:
+    sys.exit("Usage: python util/generate_manifest.py <account_identifier>")
+
 setup_dir = Path(__file__).resolve().parent
 env = Environment(loader=FileSystemLoader(setup_dir / "templates"), undefined=StrictUndefined)
 output = env.get_template("manifest.yaml.jinja").render(account_identifier=sys.argv[1])
